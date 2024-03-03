@@ -12,14 +12,12 @@ class KartuNama extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-          appBar: AppBar(
+      appBar: AppBar(
           title: Center(
-            child: Text(
-              'Kelompok 3',
-              style: TextStyle(fontSize: 40),
-            )
-          )
-          ),
+              child: Text(
+        'Kelompok 3',
+        style: TextStyle(fontSize: 20),
+      ))),
       body: SafeArea(
         child: Column(
           children: [
@@ -38,6 +36,95 @@ class KartuNama extends StatelessWidget {
                     Expanded(
                       child: Container(
                         color: Color.fromARGB(255, 144, 189, 183),
+                        child: Padding(
+                          padding: EdgeInsets.all(20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: Text(
+                                  'SHABRINA ZAHRA AULIA',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(
+                                        255, 228, 188, 8), // Updated color
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    
+                                    child: Image.asset(
+                                      'images/Zahra.jpg',
+                                      width: 150,
+                                      height: 150,
+                                    ),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(5),
+                                        child: Text(
+                                          'NIM : 22091397066',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.all(5),
+                                        child: Text(
+                                          'Prodi : D4 Manajemen Informatika',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.all(5),
+                                        child: Text(
+                                          'Fakultas : Vokasi',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.all(5),
+                                        child: Text(
+                                          'TTL : Ngawi, 20 Agustus 2004',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.all(5),
+                                        child: Text(
+                                          'Alamat : Kedunggalar - Ngawi',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(height: 20),
@@ -60,7 +147,8 @@ class KartuNama extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                  height:20), // Mengatur jarak antara teks dan gambar
+                                  height:
+                                      20), // Mengatur jarak antara teks dan gambar
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -81,8 +169,8 @@ class KartuNama extends StatelessWidget {
                                         child: Text(
                                           'NIM : 22091397067',
                                           style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16),
+                                              color: Colors.white,
+                                              fontSize: 16),
                                         ),
                                       ),
                                       Padding(
@@ -90,8 +178,8 @@ class KartuNama extends StatelessWidget {
                                         child: Text(
                                           'Prodi : D4 Manajemen Informatika',
                                           style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16),
+                                              color: Colors.white,
+                                              fontSize: 16),
                                         ),
                                       ),
                                       Padding(
@@ -99,8 +187,8 @@ class KartuNama extends StatelessWidget {
                                         child: Text(
                                           'Fakultas : Vokasi',
                                           style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16),
+                                              color: Colors.white,
+                                              fontSize: 16),
                                         ),
                                       ),
                                       Padding(
@@ -108,8 +196,8 @@ class KartuNama extends StatelessWidget {
                                         child: Text(
                                           'TTL : Tuban, 14 April 2005',
                                           style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16),
+                                              color: Colors.white,
+                                              fontSize: 16),
                                         ),
                                       ),
                                       Padding(
@@ -117,8 +205,8 @@ class KartuNama extends StatelessWidget {
                                         child: Text(
                                           'Alamat : Grabagan - Tuban',
                                           style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16),
+                                              color: Colors.white,
+                                              fontSize: 16),
                                         ),
                                       ),
                                     ],
