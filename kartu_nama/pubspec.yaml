@@ -56,6 +56,7 @@ flutter:
   assets:
     - images/Dina.jpg
     - images/Zahra.jpg
+    - images/Amanda.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
