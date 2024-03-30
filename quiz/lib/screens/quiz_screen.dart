@@ -1,8 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:quiz/models/question.dart';
 import 'package:quiz/widgets/question_widget.dart';
 import 'package:quiz/widgets/result_widget.dart'; // Import ResultWidget
-import 'package:quiz/screens/transition_screen.dart';
 
 class QuizScreen extends StatefulWidget {
   final Question nextQuestion; // Menambahkan parameter nextQuestion
@@ -72,29 +73,92 @@ class _QuizScreenState extends State<QuizScreen> {
   ];
 
   void _answerQuestion(String selectedAnswer) {
-  bool isCorrectAnswer = _questions[_currentIndex].correctAnswer == selectedAnswer;
-  if (isCorrectAnswer) {
-    _score++;
+    bool isCorrectAnswer = _questions[_currentIndex].correctAnswer == selectedAnswer;
+    if (isCorrectAnswer) {
+      _score++;
+      _showAnswerDialog('Corrected', const Color.fromARGB(255, 37, 212, 42),);
+    } else {
+      _showAnswerDialog('Incorrect', Colors.red);
+    }
   }
-  if (_currentIndex < _questions.length - 1) {
-    _currentIndex++; // Hanya tingkatkan _currentIndex jika masih ada pertanyaan selanjutnya
-  }
-  if (_currentIndex < _questions.length) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => TransitionScreen(
-          isCorrectAnswer: isCorrectAnswer,
-          nextQuestion: _questions[_currentIndex], // Mengambil pertanyaan berikutnya
-          onAnswerSelected: _answerQuestion,
+
+  void _showAnswerDialog(String message, Color color) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: Colors.transparent,
+        content: Container(
+          child: Text(
+            message,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 30,
+              color: color,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.5,
+              decoration: TextDecoration.none,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(0, 0),
+                  blurRadius: 3.0,
+                  color: Colors.white,
+                ),
+                Shadow(
+                  offset: Offset(0, 0),
+                  blurRadius: 3.0,
+                  color: Colors.white,
+                ),
+                Shadow(
+                  offset: Offset(0, 0),
+                  blurRadius: 3.0,
+                  color: Colors.white,
+                ),
+                Shadow(
+                  offset: Offset(0, 0),
+                  blurRadius: 3.0,
+                  color: Colors.white,
+                ),
+                Shadow(
+                  offset: Offset(0, 0),
+                  blurRadius: 3.0,
+                  color: Colors.white,
+                ),
+                Shadow(
+                  offset: Offset(0, 0),
+                  blurRadius: 3.0,
+                  color: Colors.white,
+                ),
+                Shadow(
+                  offset: Offset(0, 0),
+                  blurRadius: 3.0,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
-    );
-  } else {
-    // Jika sudah tidak ada pertanyaan lagi, kembali ke layar sebelumnya (QuizScreen)
-    Navigator.pop(context, _currentIndex);
-  }
+      );
+    },
+  );
+  Timer(Duration(milliseconds: 1500), () {
+    Navigator.of(context).pop();
+    setState(() {
+      if (_currentIndex < _questions.length - 1) {
+        _currentIndex++;
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ResultWidget(score: _score),
+          ),
+        );
+      }
+    });
+  });
 }
+
 
 
   @override
