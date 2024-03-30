@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:quiz/models/question.dart';
 import 'package:quiz/widgets/question_widget.dart';
 import 'package:quiz/widgets/result_widget.dart'; // Import ResultWidget
+import 'package:quiz/screens/transition_screen.dart';
 
 class QuizScreen extends StatefulWidget {
+  final Question nextQuestion; // Menambahkan parameter nextQuestion
+
+  QuizScreen({required this.nextQuestion}); // Konstruktor dengan parameter nextQuestion
+
   @override
   _QuizScreenState createState() => _QuizScreenState();
 }
@@ -67,13 +72,30 @@ class _QuizScreenState extends State<QuizScreen> {
   ];
 
   void _answerQuestion(String selectedAnswer) {
-    setState(() {
-      if (_questions[_currentIndex].correctAnswer == selectedAnswer) {
-        _score++;
-      }
-      _currentIndex++;
-    });
+  bool isCorrectAnswer = _questions[_currentIndex].correctAnswer == selectedAnswer;
+  if (isCorrectAnswer) {
+    _score++;
   }
+  if (_currentIndex < _questions.length - 1) {
+    _currentIndex++; // Hanya tingkatkan _currentIndex jika masih ada pertanyaan selanjutnya
+  }
+  if (_currentIndex < _questions.length) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TransitionScreen(
+          isCorrectAnswer: isCorrectAnswer,
+          nextQuestion: _questions[_currentIndex], // Mengambil pertanyaan berikutnya
+          onAnswerSelected: _answerQuestion,
+        ),
+      ),
+    );
+  } else {
+    // Jika sudah tidak ada pertanyaan lagi, kembali ke layar sebelumnya (QuizScreen)
+    Navigator.pop(context, _currentIndex);
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
