@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';//package utama dari flutter untuk pengembangan UI
 import 'package:flutter/rendering.dart';//package untuk mengakses metode rendering
 import 'package:get/get.dart';//Package untuk manajemen state
-import 'package:get/get_state_manager/get_state_manager.dart';//paket untuk manajemen state
 import 'package:quiz_app/constants.dart';//file yang berisi konstanta-konstanta yang digunakan
 import 'package:quiz_app/controllers/quizController.dart';//Controller untuk manajemen quiz
 import 'package:quiz_app/models/question.dart';//Model untuk pertanyaan
