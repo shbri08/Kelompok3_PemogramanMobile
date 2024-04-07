@@ -184,7 +184,6 @@ class Option extends StatelessWidget {// Kelas Option adalah widget untuk menamp
           child: Container(
             margin: EdgeInsets.only(top: kDefaultPadding),// Menambahkan margin atas pada container
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: kDefaultPadding),// Menambahkan padding vertikal dan horizontal pada container
-          decoration: BoxDecoration(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black45),// Menetapkan dekorasi border dengan warna hitam
               borderRadius: BorderRadius.circular(15),// Memberikan radius border container
@@ -212,7 +211,8 @@ class Option extends StatelessWidget {// Kelas Option adalah widget untuk menamp
                 )
               ],
             ),
-          ),
+          
+          )
         );
       }
     );
@@ -222,6 +222,7 @@ class Option extends StatelessWidget {// Kelas Option adalah widget untuk menamp
 class ProgressBar extends StatelessWidget {
   const ProgressBar({
     super.key,// Konstruktor ProgressBar yang menerima parameter super.key
+    
   });
 
   @override
