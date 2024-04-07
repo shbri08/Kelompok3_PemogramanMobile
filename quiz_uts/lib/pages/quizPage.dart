@@ -1,32 +1,33 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:quiz_app/constants.dart';
-import 'package:quiz_app/controllers/quizController.dart';
-import 'package:quiz_app/models/question.dart';
-import 'package:websafe_svg/websafe_svg.dart';
+import 'package:flutter/material.dart';//package utama dari flutter untuk pengembangan UI
+import 'package:flutter/rendering.dart';//package untuk mengakses metode rendering
+import 'package:get/get.dart';//Package untuk manajemen state
+import 'package:get/get_state_manager/get_state_manager.dart';//paket untuk manajemen state
+import 'package:quiz_app/constants.dart';//file yang berisi konstanta-konstanta yang digunakan
+import 'package:quiz_app/controllers/quizController.dart';//Controller untuk manajemen quiz
+import 'package:quiz_app/models/question.dart';//Model untuk pertanyaan
+import 'package:websafe_svg/websafe_svg.dart';//Package untuk memmuat gambar SVG
 
+//Halaman utama quiz
 class QuizPage extends StatelessWidget {
   const QuizPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    QuizController _controller = Get.put(QuizController());
+    QuizController _controller = Get.put(QuizController());//menginisialisasi ccontroller quiz
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: true,//membuat konten halaman berada dibawah app bar
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        elevation: 0,
+        elevation: 0,//menghilangkan bayangan app bar
         actions: [
-          TextButton(onPressed: _controller.nextQuestion, child: Text("Skip"))
+          TextButton(onPressed: _controller.nextQuestion, child: Text("Skip"))//tombol untuk melompati pertanyaan
         ],
       ),
-      body: Body(),
+      body: Body(),//tubuh quiz
     );
   }
 }
-
+//tubuh quiz
 class Body extends StatelessWidget {
   const Body({
     super.key,
@@ -34,7 +35,8 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuizController _quizcontroller = Get.put(QuizController());
+    //menginisialisasi comtroller quiz
+    QuizController _quizcontroller = Get.put(QuizController());//menginisialisasi ccontroller quiz
     return Stack(
       children: [
         // FractionallySizedBox(
@@ -46,8 +48,8 @@ class Body extends StatelessWidget {
             children: [
               Padding(
                 padding:
-                  const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                child: ProgressBar(),
+                  const EdgeInsets.symmetric(horizontal: kDefaultPadding),//padding horizontal
+                child: ProgressBar(),//menampilkan progres bar
               ),
               SizedBox(height: kDefaultPadding),
               Padding(
@@ -57,14 +59,14 @@ class Body extends StatelessWidget {
                   () => Text.rich(
                     TextSpan(
                       text:
-                        "Pertanyaan ${_quizcontroller.questionNumber.value}",
+                        "Pertanyaan ${_quizcontroller.questionNumber.value}",//menampilkan nomor pertanyaan
                       style: Theme.of(context)
                         .textTheme
                         .headline4
                         ?.copyWith(color: kSecondaryColor),
                       children: [
                         TextSpan(
-                          text: "/${_quizcontroller.questions.length}",
+                          text: "/${_quizcontroller.questions.length}",//menampilkan total pertanyaan
                           style: Theme.of(context)
                             .textTheme
                             .headline5
@@ -75,16 +77,17 @@ class Body extends StatelessWidget {
                   ),
                 )
               ),
-              SizedBox(height: kDefaultPadding),
+              SizedBox(height: kDefaultPadding),//spasi vertikal
               Expanded(
                 child: PageView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  controller: _quizcontroller.pageController,
-                  onPageChanged: _quizcontroller.updateQuizNum,
-                  itemCount: _quizcontroller.questions.length,
+                  physics: NeverScrollableScrollPhysics(),//menghilangkan scroll
+                  controller: _quizcontroller.pageController,//controller untuk pageview
+                  onPageChanged: _quizcontroller.updateQuizNum,//Mengubah nomor pertanyaan saat halaman berubah
+                  itemCount: _quizcontroller.questions.length,// Jumlah total pertanyaan
+                  //kartu pertanyaan
                   itemBuilder: (context, index) => QuestionCard(
                     key: ValueKey('question_card_$index'),
-                    question: _quizcontroller.questions[index]),
+                    question: _quizcontroller.questions[index]),//kartu pertanyaan
                 ),
               ),
             ],
@@ -101,27 +104,27 @@ class QuestionCard extends StatelessWidget {
     required this.question,
   }) : super(key: key);
 
-  final Question question;
+  final Question question;//pertanyaan
 
   @override
   Widget build(BuildContext context) {
-    QuizController _controller = Get.put(QuizController());
+    QuizController _controller = Get.put(QuizController());//Menginisialisasi controller kuis
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-      padding: EdgeInsets.all(kDefaultPadding),
+      margin: EdgeInsets.symmetric(horizontal: kDefaultPadding),//margin horizontal
+      padding: EdgeInsets.all(kDefaultPadding),//padding pada  konten baru
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
+        color: Colors.white,//warna latar belakang kartu
+        borderRadius: BorderRadius.circular(25),//membuat sudut karu bulat
       ),
       child: Column(
         children: [
           if (question.image != null && question.image!.isNotEmpty)
             Image.asset(
-              question.image!,
-              height: 125,
-              width: 125,
+              question.image!,// Memuat gambar pertanyaan jika tersedia
+              height: 125,//tinggi kamar
+              width: 125,//lebar kamar
             ),
-          SizedBox(height: 15),
+          SizedBox(height: 15),//spasi vertikal
           Text(
             question.question,
             style: Theme.of(context)
@@ -135,7 +138,7 @@ class QuestionCard extends StatelessWidget {
             (index) => Option(
               index: index,
               text: question.options[index],
-              press: () => _controller.checkAns(question, index),
+              press: () => _controller.checkAns(question, index),//menandai jawaban
             ),
           ),
         ],
@@ -151,16 +154,16 @@ class Option extends StatelessWidget {
     required this.index,
     required this.press,
   });
-  final String text;
-  final int index;
-  final VoidCallback press;
+  final String text;//teks opsi
+  final int index;//indeks opsi
+  final VoidCallback press;//fungsi saat opsi dipilih
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<QuizController>(
       init: QuizController(),
       builder: (qnController) {
-
+      //fungsi untuk mendapatkan warna yang benar
         Color getTheRightColor() {
           if (qnController.isAnswered) {
             if (index == qnController.correctAns) {
@@ -172,7 +175,7 @@ class Option extends StatelessWidget {
           }
           return kGrayColor;
         }
-
+      //fungsi untuk mendapatkan ikon yang benar
         IconData getTheRightIcon() {
           return getTheRightColor() == kRedColor ? Icons.close : Icons.done;
         }
@@ -215,7 +218,7 @@ class Option extends StatelessWidget {
     );
   }
 }
-
+//indikator proses
 class ProgressBar extends StatelessWidget {
   const ProgressBar({
     super.key,
